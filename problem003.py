@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # 2019-08-27
 #
@@ -40,5 +40,5 @@ def deserialize(s):
 node = Node('root', Node('left', Node('left.left')), Node('right'))
 assert deserialize(serialize(node)).left.left.val == 'left.left'
 
-print serialize(node)
-print serialize(deserialize(serialize(node)))
+print(serialize(node))
+print(serialize(deserialize(serialize(node))))

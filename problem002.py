@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # 2019-08-26
 #
@@ -12,6 +12,8 @@
 # 
 # Follow-up: what if you can't use division?
 
+import functools
+
 inputs = [[1, 2, 3, 4, 5],
           [3, 2, 1]]
 
@@ -23,12 +25,12 @@ for input in inputs:
     output = []
     for element in input:
         output.append(product / element)
-    print input, output
+    print(input, output)
 
 # Simplified
 for input in inputs:
-    product = reduce((lambda x,y:x*y), input)
-    print input, [product / element for element in input]
+    product = functools.reduce((lambda x,y:x*y), input)
+    print(input, [product / element for element in input])
 
 # Np division
 for input in inputs:
@@ -38,4 +40,17 @@ for input in inputs:
         for j in range(len(input)):
             if j != i: product *= input[j]
         output.append(product)
-    print input, output
+    print(input, output)
+
+# Dynamic programming (after consulting with Dustin)
+for input in inputs:
+    forward = [1]
+    for n in input[:-1:1]:
+        forward.append(forward[-1] * n)
+
+    reverse = [1]
+    for n in input[:0:-1]:
+        reverse.append(reverse[-1] * n)
+    reverse.reverse()
+
+    print(input, [f * r for (f, r) in zip(forward, reverse)])
