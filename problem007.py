@@ -2,7 +2,7 @@
 
 # 2019-08-31
 #
-# Given the mapping a = 2, b = 2, ... z = 26, and an encoded message, count the
+# Given the mapping a = 1, b = 2, ... z = 26, and an encoded message, count the
 # number of ways it can be decoded.
 #
 # For example, the message '111' would give 3, since it could be decoded as
@@ -12,7 +12,7 @@
 # allowed.
 
 def is_valid(s):
-    return int(s) <= 24
+    return int(s) <= 26
 
 def encodings(s):
     if len(s) == 0:
@@ -25,15 +25,25 @@ def encodings(s):
     return [s[0:2] + '-' + r for r in encodings(s[2:]) if is_valid(s[0:2])] + \
            [s[0]   + '-' + r for r in encodings(s[1:])]
 
-print(encodings(''))
-print(encodings('1'))
-print(encodings('7'))
-print(encodings('56'))
-print(encodings('567'))
-print(encodings('12'))
-print(encodings('11'))
-print(encodings('111'))
-print(encodings('1111'))
-print(encodings('1234567'))
-print(encodings('2323'))
-print(encodings('2325'))
+def count_encodings(s):
+    if len(s) <= 1: return 1
+    return count_encodings(s[1:]) + \
+          (count_encodings(s[2:]) if is_valid(s[0:2]) else 0)
+
+inputs = [
+    '',
+    '1',
+    '7',
+    '56',
+    '567',
+    '12',
+    '11',
+    '111',
+    '1111',
+    '1234567',
+    '2626',
+    '2327',
+    ]
+
+for input in inputs:
+    print(input, encodings(input), count_encodings(input))
