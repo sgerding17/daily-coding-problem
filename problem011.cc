@@ -10,7 +10,6 @@
 // Hint: Try preprocessing the dictionary into a more efficient data structure
 // to speed up queries.
 
-#include <assert.h>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -81,60 +80,12 @@ private:
     shared_ptr<node_t> root {new node_t};
 };
 
-//void build_index(const vector<string> &words, shared_ptr<node_t> root)
-//{
-//    for (const auto &word : words)
-//    {
-//        shared_ptr<node_t> node = root;
-//        for (const auto letter : word)
-//        {
-//            if (!node->next.count(letter))
-//            {
-//                node->next[letter] = shared_ptr<node_t>(new node_t);
-//            }
-//            node = node->next[letter];
-//        }
-//        node->words.push_back(word);
-//    }
-//}
-//
-//void get_words(shared_ptr<node_t> node, vector<string> &matches)
-//{
-//    for (const auto &word : node->words)
-//    {
-//        matches.push_back(word);
-//    }
-//    for (const auto &letter_node_pair : node->next)
-//    {
-//        auto &next = letter_node_pair.second;
-//        get_words(next, matches);
-//    }
-//}
-//
-//void lookup(shared_ptr<node_t> root,
-//            const string &prefix,
-//            vector<string> &matches)
-//{
-//    matches.clear();
-//
-//    shared_ptr<node_t> node = root;
-//    for (const auto letter : prefix)
-//    {
-//        if (!node->next.count(letter))
-//        {
-//            return;
-//        }
-//        node = node->next[letter];
-//    }
-//    get_words(node, matches);
-//}
-
 int main()
 {
     Index index;
-    index.add_words({"deer", "deal", "dog"});
+    index.add_words({"deer", "deal", "dog", "cat", ""});
 
-    for (const auto &prefix : vector<string>({"d", "de", "dea", "do", "di"}))
+    for (const auto &prefix : vector<string>({"d", "de", "dea", "do", "x", ""}))
     {
         vector<string> matches;
         index.lookup_prefix(prefix, matches);
@@ -142,17 +93,6 @@ int main()
         cout << prefix << ":" << endl;
         for (const auto &m : matches) cout << "  " << m << endl;
     }
-
-//    shared_ptr<node_t> root(new node_t);
-//    build_index({"deer", "deal", "dog"}, root);
-//
-//    for (const auto &prefix : vector<string>({"d", "de", "do", "di"}))
-//    {
-//        vector<string> matches;
-//        lookup(root, prefix, matches);
-//        cout << prefix << ":" << endl;
-//        for (const auto &m : matches) cout << "  " << m << endl;
-//    }
 
     return 0;
 }
