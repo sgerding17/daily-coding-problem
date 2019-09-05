@@ -14,7 +14,7 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -60,7 +60,7 @@ private:
     struct node_t
     {
         vector<string> words;
-        map<char, shared_ptr<node_t>> next;
+        unordered_map<char, shared_ptr<node_t>> next;
     };
 
     void get_words(const shared_ptr<node_t> node, vector<string> &matches) const
