@@ -30,6 +30,19 @@ def count_encodings(s):
     return count_encodings(s[1:]) + \
           (count_encodings(s[2:]) if is_valid(s[0:2]) else 0)
 
+def count_encodings_linear(s):
+    last_last = 0
+    last = 1
+    for i in range(len(s)):
+        idx = len(s) - i - 1
+        if is_valid(s[idx:idx+2]):
+            cur = last_last + last
+        else:
+            cur = last
+        last_last = last
+        last = cur
+    return last
+
 inputs = [
     '',
     '1',
@@ -46,4 +59,4 @@ inputs = [
     ]
 
 for input in inputs:
-    print(input, encodings(input), count_encodings(input))
+    print(input, encodings(input), count_encodings(input), count_encodings_linear(input))
