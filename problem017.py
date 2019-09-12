@@ -45,7 +45,6 @@
 # * The name of a file contains at least a period and an extension.
 # * The name of a directory or sub-directory will not contain a period.
 
-
 def parse(entry):
     depth = 0
     while entry[depth] == '\t': depth += 1
