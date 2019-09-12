@@ -46,4 +46,20 @@ def subarray_maxes(a, k):
 
     return output
 
+def subarray_maxes_kn(a, k):
+    return [max(a[i:i+k]) for i in range(len(a) - k + 1)]
+
 assert subarray_maxes([10, 5, 2, 7, 8, 7], 3) == [10, 7, 8, 8]
+
+import random
+min_val = -100
+max_val = 100
+max_size = 50
+for i in range(1000):
+    a = [random.randrange(min_val, max_val) for _ in
+            range(random.randrange(1, max_size))]
+
+    k = random.randrange(1, len(a) + 1)
+    expected = subarray_maxes_kn(a, k)
+    if subarray_maxes(a, k) != subarray_maxes_kn(a, k):
+        print(a, k, subarray_maxes(a, k), subarray_maxes_kn(a, k))
