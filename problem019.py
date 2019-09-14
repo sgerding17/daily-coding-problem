@@ -22,6 +22,7 @@ def min_total_cost(cost):
                 if color2 == color1: continue
                 total_cost[house][color2] = min(total_cost[house][color2],
                                                 total_cost[house - 1][color1] + cost[house][color2])
+
     return min(total_cost[-1])
 
 cost = [
