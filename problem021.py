@@ -37,8 +37,28 @@ def min_rooms2(lectures):
         max_rooms = max(max_rooms, num_rooms)
     return max_rooms
 
+def min_rooms3(lectures):
+    starts = [l[0] for l in lectures]
+    ends = [l[1] for l in lectures]
+    last_time = max(ends)
+
+    schedule = [0] * (last_time + 1)
+    for start in starts: schedule[start] += 1
+    for end in ends:     schedule[end] -= 1
+
+    max_rooms = 0
+    num_rooms = 0
+    for time in schedule:
+        num_rooms += time
+        max_rooms = max(max_rooms, num_rooms)
+    return max_rooms
+
+
 print(min_rooms([(30, 75), (0, 50), (60, 150)]))
 print(min_rooms([(30, 75), (0, 50), (1, 31), (60, 150)]))
 
 print(min_rooms2([(30, 75), (0, 50), (60, 150)]))
 print(min_rooms2([(30, 75), (0, 50), (1, 31), (60, 150)]))
+
+print(min_rooms3([(30, 75), (0, 50), (60, 150)]))
+print(min_rooms3([(30, 75), (0, 50), (1, 31), (60, 150)]))
