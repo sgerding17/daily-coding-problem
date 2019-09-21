@@ -56,11 +56,12 @@ class heap:
 
         return top
 
-import random
-for i in range(100):
-    a = [random.randrange(-100, 100) for _ in range(random.randrange(1, 100))]
-    random.shuffle(a)
-    h = heap()
-    for v in a: h.push(v)
-    b = [h.pop() for _ in a]
-    assert sorted(a) == b
+if __name__ == '__main__':
+    import random
+    for i in range(100):
+        a = [random.randrange(-100, 100) for _ in range(random.randrange(1, 100))]
+        random.shuffle(a)
+        h = heap()
+        for v in a: h.push(v)
+        b = [h.pop() for _ in a]
+        assert sorted(a) == b
