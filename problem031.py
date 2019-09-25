@@ -10,31 +10,42 @@
 #
 # Given two strings, compute the edit distance between them.
 
-def masks(partial, positions, length):
-    if len(partial) == positions: return [partial]
+def masks(partial, count, length):
+    if len(partial) == count: return [partial]
     last = partial[-1] if partial else -1
     outputs = []
     for i in range(last + 1, length):
-        outputs += masks(partial + [i], positions, length)
+        outputs += masks(partial + [i], count, length)
     return outputs
 
 def dist(short, long, mask):
+    assert len(long) == len(short) + len(mask)
     diffs = 0
     for i in range(len(long)):
-        if i == mask:
+        if mask and i == mask[0]:
             mask = mask[1:]
             continue
-        if short[0] != long(i): diffs += 1
+        if short[0] != long[i]: diffs += 1
         short = short[1:]
     return diffs
 
 def edit_distance(short, long):
+    (short, long) = (short, long) if len(short) <= len(long) else (long, short)
     min_dist = len(long)
     for mask in masks([], len(long) - len(short), len(long)):
-        min_dist = min(min_dist, dist(short, long, mask))
+        min_dist = min(min_dist, dist(short, long, mask) + len(mask))
     return min_dist
 
-for mask in masks([], 3, 8):
-    print(mask)
+print(edit_distance('kitten', 'sitting'))
+print(edit_distance('sitting', 'kitten'))
+
+print(edit_distance('kitten', 'kitten'))
+print(edit_distance('kitten', 'xxxxkitten'))
+print(edit_distance('kitten', 'kittenxxxx'))
+print(edit_distance('kitten', 'xxkittenxx'))
+print(edit_distance('kitten', 'kitxxxxten'))
 
 print(edit_distance('mommy', 'daddy'))
+print(edit_distance('log', 'dog'))
+
+print(edit_distance('the quick brown fox', 'jumped over the lazy dogs'))
