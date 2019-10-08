@@ -36,16 +36,19 @@ def edit_distance(short, long):
         min_dist = min(min_dist, dist(short, long, mask) + len(mask))
     return min_dist
 
-print(edit_distance('kitten', 'sitting'))
-print(edit_distance('sitting', 'kitten'))
+#print(edit_distance('kitten', 'sitting'))
+#print(edit_distance('sitting', 'kitten'))
+#
+#print(edit_distance('kitten', 'kitten'))
+#print(edit_distance('kitten', 'xxxxkitten'))
+#print(edit_distance('kitten', 'kittenxxxx'))
+#print(edit_distance('kitten', 'xxkittenxx'))
+#print(edit_distance('kitten', 'kitxxxxten'))
+#
+#print(edit_distance('mommy', 'daddy'))
+#print(edit_distance('log', 'dog'))
+#
+#print(edit_distance('the quick brown fox', 'jumped over the lazy dogs'))
 
-print(edit_distance('kitten', 'kitten'))
-print(edit_distance('kitten', 'xxxxkitten'))
-print(edit_distance('kitten', 'kittenxxxx'))
-print(edit_distance('kitten', 'xxkittenxx'))
-print(edit_distance('kitten', 'kitxxxxten'))
-
-print(edit_distance('mommy', 'daddy'))
-print(edit_distance('log', 'dog'))
-
-print(edit_distance('the quick brown fox', 'jumped over the lazy dogs'))
+import sys
+print(edit_distance(sys.argv[1], sys.argv[2]))
